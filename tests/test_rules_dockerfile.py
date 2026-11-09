@@ -227,3 +227,11 @@ def test_drl006_flags_unreadable_credential_paths(project):
     from docklint.engine import scan
 
     assert "DRL006" in {f.rule.id for f in scan(root).findings}
+
+
+def test_drl014_quiet_for_a_one_shot_job(project):
+    """A batch container has nothing to health-check; only published ports imply a service."""
+    from docklint.engine import scan
+
+    root = project(dockerfile="FROM python:3.12-slim\nUSER 10001\nCMD [\"python\", \"solve.py\"]\n")
+    assert "DRL014" not in {f.rule.id for f in scan(root).findings}

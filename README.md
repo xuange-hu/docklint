@@ -150,7 +150,7 @@ graph), `docklint_demo`.
 | DRL011 | low | `pip install` without `--no-cache-dir` |
 | DRL012 | high | `ENV PASSWORD=...` — readable via `docker inspect` |
 | DRL013 | high | `ARG SECRET=...` — visible in `docker history` |
-| DRL014 | low | no `HEALTHCHECK` on a stage that serves traffic |
+| DRL014 | low | no `HEALTHCHECK` on a stage that publishes a port |
 | DRL015 | low | `EXPOSE` below 1024 |
 | DRL016 | medium | `ONBUILD` — invisible instructions in every child image |
 | DRL017 | high | `rm -rf $VAR/` — becomes `rm -rf /` when `VAR` is empty |

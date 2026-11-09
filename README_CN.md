@@ -141,7 +141,7 @@ $ docklint rules --pass 3                   # 只看跨文件那一遍能发现�
 | DRL011 | low | `pip install` 缺 `--no-cache-dir` |
 | DRL012 | high | `ENV PASSWORD=...`，`docker inspect` 可见 |
 | DRL013 | high | `ARG SECRET=...`，`docker history` 可见 |
-| DRL014 | low | 对外服务却没有 `HEALTHCHECK` |
+| DRL014 | low | 发布了端口却没有 `HEALTHCHECK` |
 | DRL015 | low | `EXPOSE` 了 1024 以下的端口 |
 | DRL016 | medium | `ONBUILD`，子镜像里藏着看不见的指令 |
 | DRL017 | high | `rm -rf $VAR/`，变量为空时变成 `rm -rf /` |

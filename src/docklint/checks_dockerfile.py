@@ -332,9 +332,11 @@ def _check_final_stage(df: Dockerfile) -> list[Finding]:
                 stage=final.label,
             )
         )
-    if "HEALTHCHECK" not in names and (
-        "EXPOSE" in names or "CMD" in names or "ENTRYPOINT" in names
-    ):
+    # Only a stage that publishes a port is plausibly "serving traffic". A
+    # one-shot CLI (`CMD ["python", "solve.py"]`) has nothing to health-check,
+    # and demanding one there is noise — found by auditing this family's own
+    # CTF labs, which are all one-shot.
+    if "HEALTHCHECK" not in names and "EXPOSE" in names:
         line = final.instructions[-1].line if final.instructions else final.line
         out.append(
             _finding(
