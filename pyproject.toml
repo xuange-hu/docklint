@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docklint"
+version = "0.1.0"
+description = "Zero-dependency security auditor for Dockerfiles, compose files and .dockerignore — three passes, evidence-first, SARIF for CI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "xuange-hu" }]
+# Dependency-free on purpose: the auditor has to run inside a slim CI container
+# with no network. A scanner that needs `pip install` to audit your image is a
+# scanner nobody runs in the job that builds the image.
+dependencies = []
+keywords = [
+  "docker",
+  "dockerfile",
+  "container",
+  "security",
+  "static-analysis",
+  "sarif",
+  "devsecops",
+  "linter",
+  "compose",
+  "supply-chain",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.optional-dependencies]
+# mcp 2.x renamed FastMCP -> MCPServer and moved the import path; this server
+# targets the 1.x line only.
+mcp = ["mcp>=1.2,<2"]
+
+[project.urls]
+Homepage = "https://github.com/xuange-hu/docklint"
+Repository = "https://github.com/xuange-hu/docklint"
+Issues = "https://github.com/xuange-hu/docklint/issues"
+
+[project.scripts]
+docklint = "docklint.cli:main"
+docklint-mcp = "docklint.mcp_server:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+docklint = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+# A small, explicit set: the imports and modernity rules catch real breakage on
+# 3.10 (the oldest supported leg), and SIM catches the flattened-conditional
+# mistakes that ruff's newer releases flag in CI before they flag locally.
+select = ["E", "F", "I", "UP", "B", "SIM"]
