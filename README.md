@@ -190,6 +190,12 @@ graph), `docklint_demo`.
 
 ## Design notes
 
+**Not the same job as [layerlint](https://github.com/xuange-hu/layerlint).**
+layerlint models what each layer adds — a `RUN rm -rf` cannot delete what an
+earlier layer wrote. docklint never simulates layers; it reads three files and
+reports where they contradict each other. Different question, different tool.
+
+
 **Evidence, not opinions.** Every finding carries `path:line` and the original
 source line. A finding you cannot re-check by hand is a rumour.
 
