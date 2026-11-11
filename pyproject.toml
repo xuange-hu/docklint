@@ -44,7 +44,7 @@ classifiers = [
 [project.optional-dependencies]
 # mcp 2.x renamed FastMCP -> MCPServer and moved the import path; this server
 # targets the 1.x line only.
-mcp = ["mcp>=1.2,<2"]
+mcp = ["mcp>=1.2,<3"]
 
 [project.urls]
 Homepage = "https://github.com/xuange-hu/docklint"
