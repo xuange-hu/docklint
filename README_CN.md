@@ -28,6 +28,20 @@ uvx --from "git+https://github.com/xuange-hu/docklint" docklint scan .
 
 ---
 
+## 目录
+
+- [为什么是三遍](#为什么是三遍)
+- [三步跑通](#三步跑通)
+- [GitHub Actions](#github-actions)
+- [MCP 服务（Claude Code / Cursor / Cline）](#mcp-服务claude-code--cursor--cline)
+- [规则总览](#规则总览)
+  - [第 1 遍 · Dockerfile（20 条）](#第-1-遍--dockerfile20-条)
+  - [第 2 遍 · compose（12 条）](#第-2-遍--compose12-条)
+  - [第 3 遍 · 跨文件关系（6 条）](#第-3-遍--跨文件关系6-条)
+- [设计取舍](#设计取舍)
+- [开发](#开发)
+- [许可](#许可)
+
 ## 为什么是三遍
 
 | 第几遍 | 读什么 | 回答什么 |

@@ -43,6 +43,20 @@ uvx --from "git+https://github.com/xuange-hu/docklint" docklint scan .
 
 ---
 
+## Contents
+
+- [Why three passes](#why-three-passes)
+- [Quick start](#quick-start)
+- [GitHub Actions](#github-actions)
+- [MCP server (Claude Code / Cursor / Cline)](#mcp-server-claude-code--cursor--cline)
+- [Rules](#rules)
+  - [Pass 1 — the Dockerfile (20)](#pass-1--the-dockerfile-20)
+  - [Pass 2 — the compose file (12)](#pass-2--the-compose-file-12)
+  - [Pass 3 — relations (6)](#pass-3--relations-6)
+- [Design notes](#design-notes)
+- [Development](#development)
+- [License](#license)
+
 ## Why three passes
 
 | Pass | Reads | Answers |
