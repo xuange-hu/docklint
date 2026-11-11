@@ -102,7 +102,7 @@ jobs:
         run: |
           python -m pip install .
           docklint scan . --fail-on high --format sarif -o docklint.sarif
-      - uses: github/codeql-action/upload-sarif@4bfa242aa49c5f7c6770b98670d354a7dfac05f8  # v3
+      - uses: github/codeql-action/upload-sarif@33d7b85da1a04171e211befe2c739303b9a4c066  # v3
         with:
           sarif_file: docklint.sarif
           category: docklint
