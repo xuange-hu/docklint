@@ -232,7 +232,6 @@ def build_server():
 
     mcp = FastMCP(name="docklint")
 
-    @mcp.tool(name="docklint_scan")
     def _scan_tool(
         path: str = ".",
         min_severity: str = "info",
@@ -243,29 +242,38 @@ def build_server():
     ) -> str:
         return docklint_scan(path, min_severity, ignore_rules, ignore_groups, fail_on, max_findings)
 
-    @mcp.tool(name="docklint_explain")
     def _explain_tool(rule_id: str) -> str:
         return docklint_explain(rule_id)
 
-    @mcp.tool(name="docklint_rules")
     def _rules_tool(group: str = "", pass_no: int = 0) -> str:
         return docklint_rules(group, pass_no)
 
-    @mcp.tool(name="docklint_sarif")
     def _sarif_tool(path: str = ".") -> str:
         return docklint_sarif(path)
 
-    @mcp.tool(name="docklint_dockerfile")
     def _dockerfile_tool(path: str = "Dockerfile") -> str:
         return docklint_dockerfile(path)
 
-    @mcp.tool(name="docklint_compose")
     def _compose_tool(path: str = "docker-compose.yml") -> str:
         return docklint_compose(path)
 
-    @mcp.tool(name="docklint_demo")
     def _demo_tool() -> str:
         return docklint_demo()
+
+    # FastMCP reads fn.__doc__ at registration time, so copy the underlying
+    # docstring onto each wrapper *before* mcp.tool() runs - the manifest
+    # promises these descriptions and an empty one is useless to an agent.
+    for name, wrapper, fn in (
+        ("docklint_scan", _scan_tool, docklint_scan),
+        ("docklint_explain", _explain_tool, docklint_explain),
+        ("docklint_rules", _rules_tool, docklint_rules),
+        ("docklint_sarif", _sarif_tool, docklint_sarif),
+        ("docklint_dockerfile", _dockerfile_tool, docklint_dockerfile),
+        ("docklint_compose", _compose_tool, docklint_compose),
+        ("docklint_demo", _demo_tool, docklint_demo),
+    ):
+        wrapper.__doc__ = fn.__doc__
+        mcp.tool(name=name)(wrapper)
 
     return mcp
 

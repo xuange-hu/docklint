@@ -118,3 +118,13 @@ def test_missing_file_tools_return_errors(tmp_path):
 def test_demo_tool_covers_every_rule():
     payload = json.loads(mcp_server.docklint_demo())
     assert len(payload["rules_hit"]) == 38
+
+
+def test_every_served_tool_has_a_description():
+    """FastMCP serves an empty description when the registered function has no
+    docstring - an unidentified tool is an uncallable tool."""
+    import asyncio
+
+    server = mcp_server.build_server()
+    for t in asyncio.run(server.list_tools()):
+        assert (t.description or "").strip(), f"{t.name} has no description"

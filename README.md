@@ -1,7 +1,7 @@
 # docklint
 
 [![CI](https://github.com/xuange-hu/docklint/actions/workflows/ci.yml/badge.svg)](https://github.com/xuange-hu/docklint/actions/workflows/ci.yml)
-[![tests](https://img.shields.io/badge/tests-199%20passing-brightgreen)](https://github.com/xuange-hu/docklint/tree/main/tests)
+[![tests](https://img.shields.io/badge/tests-200%20passing-brightgreen)](https://github.com/xuange-hu/docklint/tree/main/tests)
 [![python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://github.com/xuange-hu/docklint/blob/main/pyproject.toml)
 [![dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)](https://github.com/xuange-hu/docklint/blob/main/pyproject.toml)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)

@@ -8,7 +8,6 @@ manifest entry (or the reverse) means the documentation is lying.
 from __future__ import annotations
 
 import os
-import re
 
 import pytest
 
@@ -25,11 +24,14 @@ def test_tool_names_are_unique_and_prefixed():
     assert all(name.startswith("docklint_") for name in names)
 
 
-def test_decorator_count_matches_the_manifest():
-    with open(os.path.join(SRC, "mcp_server.py"), encoding="utf-8") as fh:
-        source = fh.read()
-    decorated = re.findall(r'@mcp\.tool\(name="([^"]+)"\)', source)
-    assert decorated == list(mcp_server.TOOLS)
+def test_server_serves_exactly_the_manifest():
+    """Registration is a loop over TOOLS now, so counting decorators in the
+    source proves nothing - build the server and ask it what it serves."""
+    import asyncio
+
+    server = mcp_server.build_server()
+    served = {t.name for t in asyncio.run(server.list_tools())}
+    assert served == set(mcp_server.TOOLS)
 
 
 def test_manifest_entries_carry_descriptions():
