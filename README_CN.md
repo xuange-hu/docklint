@@ -1,5 +1,10 @@
 # docklint
 
+[![tests](https://img.shields.io/badge/tests-200-brightgreen)](https://github.com/xuange-hu/docklint/actions)
+[![python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
+[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![deps](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)](https://github.com/xuange-hu/docklint/blob/main/pyproject.toml)
+
 **同时读三个文件的容器构建审计器。**
 
 绝大多数 Dockerfile linter 只读一个文件。真正昂贵的错误，往往藏在三个文件的缝隙里：Dockerfile、`docker-compose.yml`、`.dockerignore`。
